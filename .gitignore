@@ -11,9 +11,12 @@ CMakeUserPresets.json
 
 ########## C++
 CMakeEnv.txt
+_CPack_Packages
+releases
 .env
 *.dll
 *.sln
+coverage
 
 ########## Javascript
 logs

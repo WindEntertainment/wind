@@ -16,54 +16,30 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 message("Building with CMake version: ${CMAKE_VERSION}")
 
-add_subdirectory(./game/)
+option(ENABLE_TESTS "Enable tests" OFF)
+
+if(ENABLE_TESTS AND CMAKE_BUILD_TYPE STREQUAL "Debug")
+  message("Testing enabled")
+
+  enable_testing()
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --coverage -fprofile-arcs -ftest-coverage")
+
+  add_custom_target(coverage
+    COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_SOURCE_DIR}/tests/coverage
+    COMMAND mkdir ${CMAKE_SOURCE_DIR}/tests/coverage
+    # COMMAND game-tests
+    COMMAND wind-tests
+    COMMAND gcovr --root ${CMAKE_SOURCE_DIR} --exclude '.*/tests/.*' --exclude '.*/CMakeFiles/.*' --exclude '.*/build/.*' --html --html-details -o ${CMAKE_SOURCE_DIR}/tests/coverage/index.html
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+    COMMENT "Generating code coverage report..."
+  )
+
+  add_subdirectory(./tests/)
+endif()
+
 add_subdirectory(./wind/)
+# add_subdirectory(./game/)
+# add_subdirectory(./editor/)
+# add_subdirectory(./examples/)
 
-############################################################
-# Install
-############################################################
-
-# Binaries
-install (TARGETS game DESTINATION bin)
-
-# set(EXTERNAL_LIBRARIES glfw3)
-
-# foreach(library ${EXTERNAL_LIBRARIES})
-#     find_package(${library} REQUIRED)
-#     target_link_libraries(game PRIVATE ${library}::${library})
-#     endforeach()
-
-# find_library(LIB )
-# find_directory(GLFW3_LIBRARY "libglfw3.a")
-install (DIRECTORY $ENV{ULTRALIGHT_PATH}/bin/ DESTINATION lib)
-
-install (DIRECTORY game/res DESTINATION etc)
-
-# Library
-# Note: may not work on windows
-# install (TARGETS glfw LIBRARY DESTINATION lib)
-
-# Config
-# install (FILES cmake-examples.conf
-#     DESTINATION etc)
-
-############################################################
-# Create DEB
-############################################################
-
-# Tell CPack to generate a .deb package
-set(CPACK_GENERATOR "Bundle")
-
-# Set a Package Maintainer.
-# This is required
-set(CPACK_BUNDLE_PLIST ${CMAKE_SOURCE_DIR}/Info.plist)
-set(CPACK_BUNDLE_ICON ${CMAKE_CURRENT_SOURCE_DIR}/icon.icns)
-set(CPACK_BUNDLE_STARTUP_COMMAND ${CMAKE_BINARY_DIR}/game/game)
-set(CPACK_BUNDLE_NAME "BIG DICK")
-set(CPACK_DEBIAN_PACKAGE_MAINTAINER "BIG DICK")
-
-# Set a Package Version
-set(CPACK_PACKAGE_VERSION ${deb_example_VERSION})
-
-# Include CPack
-include(CPack)
+include(cpack/cpack.cmake)
