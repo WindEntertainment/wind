@@ -26,7 +26,6 @@ jobs:
               artifact: "dreich-linux",
               os: "ubuntu-latest",
               engineBuildType: "Debug",
-              uiRoot: "/home/runner/work/dreich/dreich/game/data/main/UI",
               engineRoot: "/home/runner/work/dreich/dreich",
               ultralightVersion: "latest-linux-x64",
               cc: "clang",
@@ -45,8 +44,6 @@ jobs:
         uses: "./.github/workflows/utils/json-to-env"
         with:
           json: ${{ toJSON(matrix.config) }}
-      - name: UI
-        uses: "./.github/workflows/modules/ui/lint"
       - name: Engine
         uses: "./.github/workflows/modules/engine/lint"
       - name: Linting commit
@@ -65,7 +62,6 @@ jobs:
               artifact: "dreich-macos",
               os: "macos-14",
               engineBuildType: "Debug",
-              uiRoot: "/Users/runner/work/dreich/dreich/game/data/main/UI",
               engineRoot: "/Users/runner/work/dreich/dreich",
               ultralightVersion: "latest-mac-arm64",
               cc: "clang",
@@ -84,7 +80,6 @@ jobs:
         uses: "./.github/workflows/utils/json-to-env"
         with:
           json: ${{ toJSON(matrix.config) }}
-          codecovToken: ${{ secrets.CODECOV_TOKEN }}
       - uses: ./.github/workflows/utils/setup-base-libs
       - name: Engine
         uses: "./.github/workflows/modules/engine/test"
@@ -102,7 +97,6 @@ jobs:
               artifact: "dreich-windows",
               os: "windows-latest",
               engineBuildType: "Debug",
-              uiRoot: "D:/a/dreich/dreich/game/data/main/UI",
               engineRoot: "D:/a/dreich/dreich",
               ultralightVersion: "latest-win-x64",
               cc: "clang",
@@ -115,7 +109,6 @@ jobs:
               artifact: "dreich-linux",
               os: "ubuntu-latest",
               engineBuildType: "Debug",
-              uiRoot: "/home/runner/work/dreich/dreich/game/data/main/UI",
               engineRoot: "/home/runner/work/dreich/dreich",
               ultralightVersion: "latest-linux-x64",
               cc: "clang",
@@ -128,7 +121,6 @@ jobs:
               artifact: "dreich-macos",
               os: "macos-14",
               engineBuildType: "Debug",
-              uiRoot: "/Users/runner/work/dreich/dreich/game/data/main/UI",
               engineRoot: "/Users/runner/work/dreich/dreich",
               ultralightVersion: "latest-mac-arm64",
               cc: "clang",
@@ -147,8 +139,6 @@ jobs:
         uses: "./.github/workflows/utils/json-to-env"
         with:
           json: ${{ toJSON(matrix.config) }}
-      - name: UI
-        uses: "./.github/workflows/modules/ui/build"
       - uses: ./.github/workflows/utils/setup-base-libs
       - name: Engine
         uses: "./.github/workflows/modules/engine/build"
