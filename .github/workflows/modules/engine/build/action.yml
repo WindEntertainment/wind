@@ -23,21 +23,21 @@ runs:
         export CXX=${{ env.cxx }}
 
         wm run cmake-build -t wind-core -bt ${{ env.engineBuildType }}
-        wm run cpack-build -bt ${{ env.engineBuildType }}
+        # wm run cpack-build -bt ${{ env.engineBuildType }}
 
-        cd releases
-        7z x -y $(pwd)/dreich.zip -o$(pwd)
-        ls -a
+        # cd releases
+        # 7z x -y $(pwd)/dreich.zip -o$(pwd)
+        # ls -a
 
-    - name: Upload package as artifact
-      # wrong if condition
-      if: ${{ env.isRelease == 'false' }}
-      uses: actions/upload-artifact@v4
-      with:
-        name: ${{ env.artifact }}
-        path: ${{ env.projectRoot }}/dreich/releases/dreich
-        retention-days: 1
-        overwrite: true
+    # - name: Upload package as artifact
+    #   # wrong if condition
+    #   if: ${{ env.isRelease == 'false' }}
+    #   uses: actions/upload-artifact@v4
+    #   with:
+    #     name: ${{ env.artifact }}
+    #     path: ${{ env.projectRoot }}/dreich/releases/dreich
+    #     retention-days: 1
+    #     overwrite: true
 
     # - name: Upload package as artifact
     #   if: ${{ env.isRelease == true }}
