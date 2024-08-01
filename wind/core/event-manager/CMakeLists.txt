@@ -16,8 +16,7 @@ add_library(${PROJECT_NAME} STATIC
 
 target_include_directories(${PROJECT_NAME} PUBLIC ./include/)
 
-# external
-find_package(Boost REQUIRED)
-target_link_libraries(${PROJECT_NAME} PUBLIC boost::boost)
+find_package(Boost COMPONENTS system filesystem)
+target_link_libraries(${PROJECT_NAME} PUBLIC Boost::system Boost::filesystem)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE wind-ultralight)
