@@ -16,18 +16,13 @@ runs:
     - name: Install dependencies
       uses: ./.github/workflows/modules/engine/install-dependencies
 
-    - uses: actions/cache/restore@v4
-      with:
-        path: ${{ env.projectRoot }}/dreich/game/data/.cache
-        key: ${{ env.envHash }}-${{ hashFiles('${{ env.projectRoot }}/dreich/game/data/**/.export-config') }}-${{ env.os }}-asset-manager
-
-    - name: Build game with wm
+    - name: Build wind-core with wm
       shell: bash
       run: |
         export CC=${{ env.cc }}
         export CXX=${{ env.cxx }}
 
-        wm run cmake-build -t game -bt ${{ env.engineBuildType }}
+        wm run cmake-build -t wind-core -bt ${{ env.engineBuildType }}
         wm run cpack-build -bt ${{ env.engineBuildType }}
 
         cd releases
@@ -43,11 +38,6 @@ runs:
         path: ${{ env.projectRoot }}/dreich/releases/dreich
         retention-days: 1
         overwrite: true
-
-    - uses: actions/cache/save@v4
-      with:
-        path: ${{ env.projectRoot }}/dreich/game/data/.cache
-        key: ${{ env.envHash }}-${{ hashFiles('${{ env.projectRoot }}/dreich/game/data/**/.export-config') }}-${{ env.os }}-asset-manager
 
     # - name: Upload package as artifact
     #   if: ${{ env.isRelease == true }}
