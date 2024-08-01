@@ -3,7 +3,7 @@ project(wind-tests)
 add_executable(${PROJECT_NAME} main.cpp)
 
 find_package(Boost REQUIRED)
-target_link_libraries(${PROJECT_NAME} PUBLIC boost::boost)
+target_link_libraries(${PROJECT_NAME} PUBLIC Boost::unit_test_framework)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE wind-utils)
 target_link_libraries(${PROJECT_NAME} PRIVATE wind-input-system)
