@@ -8,7 +8,5 @@ runs:
       run: |
         touch .env
 
-        echo "ULTRALIGHT_PATH=${{ env.ULTRALIGHT_PATH }}" >> .env
-
         cat .env
       shell: bash

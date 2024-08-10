@@ -30,4 +30,4 @@ runs:
           echo "envHash=$envHash" >> $GITHUB_ENV
         fi
 
-        echo "CODECOV_TOKEN=$codecovToken" >> $GITHUB_ENV
+        echo "sha=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
