@@ -31,8 +31,6 @@ runs:
     - name: Create a new release
       shell: bash
       run: |
-        cd $(pwd)/releases
-        ls -a
         gh release delete $sha --yes || echo "No existing release to delete"
         gh release create $sha --title "Release $sha" --generate-notes --latest $(pwd)/releases/wind-core.zip
 
