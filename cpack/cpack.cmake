@@ -6,7 +6,7 @@ set(CPACK_SOURCE_IGNORE_FILES
 )
 
 
-install(DIRECTORY "${CMAKE_SOURCE_DIR}/wind/core/" DESTINATION ".")
+install(DIRECTORY "${CMAKE_SOURCE_DIR}/wind/core/" DESTINATION "./wind/core")
 install(FILES ${CMAKE_SOURCE_DIR}/conanfile.py DESTINATION .)
 install(FILES ${CMAKE_SOURCE_DIR}/CMakeLists.txt DESTINATION .)
 install(FILES ${CMAKE_SOURCE_DIR}/.env DESTINATION .)
