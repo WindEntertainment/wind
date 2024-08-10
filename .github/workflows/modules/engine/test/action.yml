@@ -23,12 +23,3 @@ runs:
         export CC=${{ env.cc }}
         export CXX=${{ env.cxx }}
         wm run test -wd
-
-    # - uses: codecov/codecov-action@v4
-    #   with:
-    #     fail_ci_if_error: true
-    #     files: ./coverage
-    #     flags: engine
-    #     name: dreich
-    #     token: ${{ env.CODECOV_TOKEN }}
-    #     verbose: true
