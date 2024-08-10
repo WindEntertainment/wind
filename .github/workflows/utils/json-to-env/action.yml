@@ -30,5 +30,4 @@ runs:
           echo "envHash=$envHash" >> $GITHUB_ENV
         fi
 
-        echo "GH_TOKEN=${{ secrets.GITHUB_TOKEN }}" >> $GITHUB_ENV
         echo "sha=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
