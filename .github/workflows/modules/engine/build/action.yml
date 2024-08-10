@@ -22,18 +22,6 @@ runs:
         wm run cmake-build -t wind-core -bt ${{ env.engineBuildType }}
         wm run cpack-build -bt ${{ env.engineBuildType }}
 
-    - name: Set up Git
-      shell: bash
-      run: |
-        git config user.name "GitHub Actions"
-        git config user.email "actions@github.com"
-
-    - name: Create a new release
-      shell: bash
-      run: |
-        gh release delete $sha --yes || echo "No existing release to delete"
-        gh release create $sha --title "Release $sha" --generate-notes --latest $(pwd)/releases/wind-core.zip
-
     # - name: Upload package as artifact
     #   # wrong if condition
     #   if: ${{ env.isRelease == 'false' }}
@@ -44,11 +32,11 @@ runs:
     #     retention-days: 1
     #     overwrite: true
 
-    # - name: Upload package as artifact
-    #   if: ${{ env.isRelease == true }}
-    #   uses: actions/upload-artifact@v4
-    #   with:
-    #     name: ${{ env.envHash }}
-    #     path: build/${{ env.engineBuildType }}
-    #     retention-days: 1
-    #     overwrite: true
+    - name: Upload package as release
+      if: ${{ env.isRelease == true }}
+      shell: bash
+      run: |
+        git config user.name "GitHub Actions"
+        git config user.email "actions@github.com"
+        gh release delete $sha --yes || echo "No existing release to delete"
+        gh release create $sha --title "Release $sha" --generate-notes --latest $(pwd)/releases/wind-core.zip
