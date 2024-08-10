@@ -12,6 +12,9 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+env:
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 jobs:
   linting:
     name: "Linting ${{ matrix.config.name }}"
@@ -27,7 +30,6 @@ jobs:
               os: "ubuntu-latest",
               engineBuildType: "Release",
               engineRoot: "/home/runner/work/dreich/dreich",
-              ultralightVersion: "latest-linux-x64",
               cc: "clang",
               cxx: "clang++",
               isRelease: true,
@@ -63,7 +65,6 @@ jobs:
               os: "macos-14",
               engineBuildType: "Release",
               engineRoot: "/Users/runner/work/dreich/dreich",
-              ultralightVersion: "latest-mac-arm64",
               cc: "clang",
               cxx: "clang++",
               isRelease: true,
@@ -101,7 +102,6 @@ jobs:
               os: "windows-latest",
               engineBuildType: "Release",
               engineRoot: "D:/a/dreich/dreich",
-              ultralightVersion: "latest-win-x64",
               cc: "clang",
               cxx: "clang++",
               isRelease: true,
@@ -113,7 +113,6 @@ jobs:
               os: "ubuntu-latest",
               engineBuildType: "Release",
               engineRoot: "/home/runner/work/dreich/dreich",
-              ultralightVersion: "latest-linux-x64",
               cc: "clang",
               cxx: "clang++",
               isRelease: true,
@@ -125,7 +124,6 @@ jobs:
               os: "macos-14",
               engineBuildType: "Release",
               engineRoot: "/Users/runner/work/dreich/dreich",
-              ultralightVersion: "latest-mac-arm64",
               cc: "clang",
               cxx: "clang++",
               isRelease: true,

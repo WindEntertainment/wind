@@ -11,9 +11,6 @@ runs:
     - name: Setup conan base
       uses: ./.github/workflows/utils/setup-conan
 
-    - name: Setup ultralight base
-      uses: ./.github/workflows/utils/setup-ultralight
-
     - name: Prepare engine env
       uses: ./.github/workflows/modules/engine/setup-env
 
@@ -26,12 +23,3 @@ runs:
         export CC=${{ env.cc }}
         export CXX=${{ env.cxx }}
         wm run test -wd
-
-    # - uses: codecov/codecov-action@v4
-    #   with:
-    #     fail_ci_if_error: true
-    #     files: ./coverage
-    #     flags: engine
-    #     name: dreich
-    #     token: ${{ env.CODECOV_TOKEN }}
-    #     verbose: true

@@ -1,16 +1,14 @@
-set(CPACK_BUNDLE_NAME "Dreich")
-set(CPACK_DEBIAN_PACKAGE_MAINTAINER "Dreich Inc")
-set(CPACK_PACKAGE_FILE_NAME "dreich")
-
-set_target_properties(game PROPERTIES INSTALL_RPATH "@executable_path")
-
-install (TARGETS game DESTINATION .)
-
-install (DIRECTORY $ENV{ULTRALIGHT_PATH}/bin/ DESTINATION .)
-
-install (DIRECTORY game/res DESTINATION .)
-
 set(CPACK_GENERATOR "ZIP")
-set(CPACK_BUNDLE_STARTUP_COMMAND ${CMAKE_BINARY_DIR}/game/game)
+set(CPACK_PACKAGE_FILE_NAME "wind-core")
+
+set(CPACK_SOURCE_IGNORE_FILES
+  "/build/;/.git/;/.vscode/;/CMakeFiles/;/CMakeCache.txt;/Makefile;/cmake_install.cmake"
+)
+
+
+install(DIRECTORY "${CMAKE_SOURCE_DIR}/wind/core/" DESTINATION "./core")
+install(FILES ${CMAKE_SOURCE_DIR}/conanfile.py DESTINATION .)
+install(FILES ${CMAKE_SOURCE_DIR}/CMakeLists.txt DESTINATION .)
+install(FILES ${CMAKE_SOURCE_DIR}/.env DESTINATION .)
 
 include(CPack)
